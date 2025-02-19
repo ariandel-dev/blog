@@ -6,8 +6,40 @@ tags: ["javascript"]
 title: "ky 라이브러리"
 ---
 
+toss 라이브러리 사이트를 뒤지다가 발견했다.
+
 [링크](https://github.com/sindresorhus/ky)
 많이쓰는 axios보다 많이 가벼운 모양이다.
+
+retry 옵션도 간단히 추가 가능하다
+
+```ts
+import ky from 'ky';
+
+const json = await ky('https://example.com', {
+	retry: {
+		limit: 10,
+		methods: ['get'],
+		statusCodes: [413],
+		backoffLimit: 3000
+	}
+}).json();
+```
+
+json으로 변환할때 제네릭으로 타입지정도 가능하다.
+
+```ts
+import ky from 'ky';
+
+// user1 is unknown
+const user1 = await ky('/api/users/1').json();
+// user2 is a User
+const user2 = await ky<User>('/api/users/2').json();
+// user3 is a User
+const user3 = await ky('/api/users/3').json<User>();
+```
+
+hook도 추가할수 있는것같은데 나중에 많이 애용하자.
 
 ```js {4-9}
 import ky from 'ky';
@@ -18,11 +50,12 @@ const api = ky.extend({
 			request => {
 				request.headers.set('X-Requested-With', 'ky');
 			}
-		]
+		],
+		beforeError: [],
+		beforeRetry: []
 	}
 });
 
 const response = await api.get('https://example.com/api/users');
 ```
-이렇게 hook도 추가할수 있는것같은데 나중에 많이 애용하자.
 
