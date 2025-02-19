@@ -30,5 +30,12 @@ do_gzip('input.txt', 'input.txt.gz')
   });
 ```
 
+이번에 readable stream으로 읽은 csv파일을 원하는 형식으로 변환해야하는 일이 있었는데
+[csv-parser](https://www.npmjs.com/package/csv-parser)도 이를 위한 파이프를 제공한다.
+
+### 여담
+
+zlib같은 경우 한번에 여러 인스턴스를 생성시 부하를 상당히 준다고 문서에 적혀있다.
+
 
 
