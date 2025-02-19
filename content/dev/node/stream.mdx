@@ -1,0 +1,34 @@
+---
+author: ariandel
+date: 2025-02-18
+description: "다운로드시 스트림으로 대체"
+tags: ["javascript"]
+title: 노드 스트림
+---
+
+스트림을 쓸일이 있어서 노드 문서를 찾아보았다.
+
+구글 드라이브 api로 파일을 다운로드한 뒤에 파일 내용을 readable stream으로 받아올 수 있다.
+
+노드에서 제공하는 스트림은 4종류로 이렇게 받은 데이터는 
+transform stream으로 변환해서 사용할 수 있다.
+
+노드에서는 zlib을 통해서 읽어온 스트림을 transform stream을 통해서 압축하는 기능도 제공하는 모양이다.
+
+```js
+async function do_gzip(input, output) {
+  const gzip = createGzip();
+  const source = createReadStream(input);
+  const destination = createWriteStream(output);
+  await pipeline(source, gzip, destination);
+}
+
+do_gzip('input.txt', 'input.txt.gz')
+  .catch((err) => {
+    console.error('An error occurred:', err);
+    process.exitCode = 1;
+  });
+```
+
+
+
