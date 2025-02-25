@@ -11,7 +11,7 @@ const TradingViewChart = ({ ticker }: { ticker: string }) => {
       script.type = "text/javascript";
       script.async = true;
       script.innerHTML = JSON.stringify({
-        "symbol": `NASDAQ:${ticker}`,
+        "symbol": `${ticker}`,
         "width": "100%",
         "height": 400,
         "interval": "D",
