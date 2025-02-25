@@ -1,0 +1,21 @@
+---
+author: ariandel
+date: 2025-02-20
+description: "테라폼 모듈을 다운로드 할수 있다"
+tags: ["aws"]
+title: "테라폼 모듈"
+---
+
+지금까지 인프라 구축할때 하나의 메인파일에 너무많은 리소스가 포함되면 가독성이 떨어져서
+하위 모듈로 분리해서 관리하고 있었는데
+
+테라폼에서 모듈을 다운로드할수도 있었다.
+
+vpc나 sg도 직접 설정하고있었는데 편의를 위해 나온 모듈이 있었다.. 진작 쓸껄 있는줄도 몰랏다.
+
+이번에 람다에 이벤트 브릿지 연동할 일이 있어서 찾아봣는데 친절하게 [예제](https://registry.terraform.io/modules/terraform-aws-modules/eventbridge/aws/latest/examples/with-lambda-scheduling)까지 제공하고 있었다...
+
+---
+
+vpc는 새로생성하는게 아니라 default vpc쓰고 싶었는데 그런 부분도 [지원](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest/examples/manage-default-vpc)해준다.
+

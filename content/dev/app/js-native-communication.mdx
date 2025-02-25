@@ -1,0 +1,58 @@
+---
+author: ariandel
+date: 2025-02-24
+description: "expo"
+tags: ["javascript"]
+title: "expo 체험기"
+---
+
+
+
+웹뷰앱에서 react-native와 web page간에 통신을 하기 위한 방법이다.
+
+react-native에서는 injectJavascript, injectedJavascript 메서드로 메세지 전송이 가능하다.
+
+injectedJavascript 메서드는 페이지로드후 한번만 실행된다.
+
+```javascript
+const runFirst = `
+  document.body.style.backgroundColor = 'red';
+  setTimeout(function() { window.alert('hi') }, 2000);
+  true; // note: this is required, or you'll sometimes get silent failures
+`;
+return (
+  <View style={{ flex: 1 }}>
+    <WebView
+      source={{
+        uri: 'https://github.com/react-native-webview/react-native-webview',
+      }}
+      onMessage={(event) => {}}
+      injectedJavaScript={runFirst}
+    />
+  </View>
+);
+```
+
+`injectedJavaScriptBeforeContentLoaded` 이건 위에꺼랑 같은데 컨텐츠 로드전에 실행하기 때문에
+페이지 로드가 완료되지않고 다른페이지로 이동하더라도 한번은 실행된다는 장점이 있다.
+
+> This is useful if you want to inject anything into the window, localstorage, or document prior to the web code executing.
+
+다만 문서를보니 안드로이드에서 실행이 안되는 경우가 종종 포착되어서 이슈로 등록되는 것 같다. 처음껄 쓰는게 좋을듯.
+
+---
+ 
+일반적으로는 onMessage가 가장 많이 쓰일 것 같다. 메세지를 전송하고 받는게 모두 가능하고 web에서 post하는 것도 가능하다.
+
+```javascript
+window.ReactNativeWebView.postMessage('registerPushToken');
+...
+
+onMessage={(event) => {
+  console.log(event.nativeEvent.data); // registerPushToken
+}}
+```
+
+### 여담
+
+[문서](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md#communicating-between-js-and-native)를 보면 해당 메소드가 실제로 내부에서 ios와 android별로 어떤 네이티브 함수를 실행하는지 나와있다.

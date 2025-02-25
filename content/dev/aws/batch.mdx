@@ -1,0 +1,15 @@
+---
+author: ariandel
+date: 2025-02-21
+description: "aws batch 사용기"
+tags: ["aws"]
+title: "aws batch"
+---
+
+왠만하면 람다로 끝내고싶었는데 최대실행 시간이 900초라길래 lambda로 batch를 트리거할 수 있도록 설정했다.
+
+batch는 fargate, ec2, eks 세가지 타입을 지원하는데 aws에서는 fargate를 권장한다.
+cold start도 ec2에 비해서 빠르고 별도 설정없이 구성 가능해서 쓰려고 했다.
+
+좀 더 알아보니 aws batch는 ecs task로 처리하기 버거운 작업을 병렬로 처리할 때 사용하기 좋은 서비스인 것 같다.
+
