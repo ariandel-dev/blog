@@ -1,0 +1,29 @@
+---
+author: ariandel
+date: 2025-02-27
+description: eas를 써봣다.
+tags: ["mobile"]
+title: eas 사용기록
+---
+
+네이티브 빌드환경을 클라우드에서 설정할수 있게 제공하는 서비스로
+
+CI/CD설정도 편하게 할 수 있어서 배포자동화 설정시에도 매우 편리할 듯 하다.
+
+첫 30빌드는 무료고 그 뒤부터 플랜제로 이용할수 있다..
+
+설정시에 여러모로 편리하기는 해서 한번 써봣다.
+
+---
+
+빌드를 로컬에서 하면 무료플랜으로 계속 사용 가능하다.
+
+애플 배포시 설정할 것들이 되게 많은데 예전에 일일히 사이트에서 설정하던걸 자동으로 설정해줘서 매우 편리하다.
+
+찾아보니 이미 이런걸 지원해주는 [툴](https://fastlane.tools/)이 있기는하다. eas에서도 내부적으로 이걸 사용하는것같다. 설치가 안되어있으면 에러가 나온다.
+
+```bash
+Fastlane is not available, make sure it's installed and in your PATH
+spawn fastlane ENOENT
+```
+

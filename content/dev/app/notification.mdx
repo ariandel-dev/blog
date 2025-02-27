@@ -1,0 +1,20 @@
+---
+author: ariandel
+date: 2025-02-26
+description: 헤드리스 알림 삽질기록
+tags: ["mobile"]
+title: 헤드리스 알림 삽질기록
+---
+
+푸시알림은 안드로이드의 경우 firebase 푸시알림을 통해서 디바이스로 전달되고 아이폰의 경우 apn 서버를 이용한다.
+
+각각 백그라운드에서 잘 작동하게 하려면 네이티브 모듈을 수정해야 하는데 이게 번거롭다.
+
+expo에서는 이에대한 해법으로 자체 서버를 운영하고 여기서 fcm, apn에 요청을 한 다음에 그 결과를 디바이스로 전달하는 [방식](https://docs.expo.dev/push-notifications/sending-notifications/#http2-api)을 사용한다.
+
+이렇게 하면 expo에서 제공하는 api를 통해서 헤드리스 푸시도 쉽게 설정 가능하다.
+
+백엔드서버에서 알림보내는 코드를 좀 수정해주기는 해야 하기는 하는데 
+expo쓰면서 이렇게 네이티브 모듈을 자체적으로 세팅해주는 기능들이 참 편하다고 생각한다.
+
+알림 [테스트](https://expo.dev/notifications)를 위한 기능도 제공하니 테스트할때 쓰면 좋을듯하다.
