@@ -1,0 +1,53 @@
+---
+author: ariandel
+date: 2025-02-28
+description: 깃허브에서 찾은 튜토리얼 
+tags: ["dev", "go"]
+title: learn-go-with-tests
+---
+
+깃허브에서 고에 관한 튜토리얼중에 [괜찮은걸](https://quii.gitbook.io/learn-go-with-tests/) 찾아서 따라해보았다.
+
+따라해보면서 기존에 쓰던 node와 비교해 괜찮은 점들을 정리해보려한다.
+
+
+### 테스트 라이브러리 내장됨
+
+node에는 테스트용 라이브러리가 많아서 알아보고 고르는 시간이 소요되기도 하고
+새로 참여한 프로젝트에서 다른 라이브러리를 사용하면 학습비용이 소모되는데 
+
+고는 언어에 테스팅 모듈이 내장되어 있어서 이런 고민을 할 필요가 없다!
+
+### 테스트 스크립트 작성 팁
+
+> When you retrospectively write tests, there is the risk that your test may continue to pass even if the code doesn't work as intended.
+
+TDD에대해선 잘 모르지만 일단 이건 좀 중요한 것 같다.
+
+우선 테스트 스크립트로 함수가 어떻게 작동되면 좋을지 명시를 하고, 실제 구현을 들어가는 것이 안정성 측면에서 좋을듯.
+
+> [!NOTE]
+>
+> It is important that your tests are clear specifications of what the code needs to do!
+
+### 커밋 팁
+
+TDD의 단계에서 테스팅이 완료된 함수(기능)이 있으면 단위별로 커밋을 하되 푸시는 리팩터링이 끝난 뒤에 하는 [것](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world#a-note-on-source-control)으로 하자!
+
+### constant
+
+귀찮아서 자주 간과하는 부분이지만 최대한 함수 내부에서 magic number는 줄이고 상수로 빼두는 것이 좋다!
+
+### testing.TB
+
+테스트함수에서 중복되는 부분을 helper함수로 분리했는데 여기서도 t.Errorf를 써야 하는 경우가 있어서
+파라미터로 주입하려고 했는데 튜토리얼을 보니까 testing.T 와 B를 모두 충족하는 인터페이스인 
+testing.TB를 파라미터 타입으로 두는 것이 일반적인 것 같다!
+
+또 이런 헬퍼함수는 첫줄에 t.Helper()를 호출해서 헬퍼라고 명시해야 디버깅시에 발견이 용이한듯.
+
+> [!NOTE]
+>
+> By doing this, when it fails, the line number reported will be in our function call rather than inside our test helper.
+
+
